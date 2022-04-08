@@ -65,7 +65,7 @@ void create_shared_memory_buffers(struct main_data *data, struct communication_b
 
 void launch_processes(struct communication_buffers *buffers, struct main_data *data)
 {
-	// xardoso
+	// TODO
 }
 
 void user_interaction(struct communication_buffers *buffers, struct main_data *data)
@@ -80,9 +80,12 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 
 void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data)
 {
+	// TODO
 }
 
-void read_status(struct main_data *data) {}
+void read_status(struct main_data *data)
+{ // todo
+}
 
 void stop_execution(struct main_data *data, struct communication_buffers *buffers)
 {
@@ -94,11 +97,12 @@ void stop_execution(struct main_data *data, struct communication_buffers *buffer
 
 void wait_processes(struct main_data *data)
 {
-	// xardoso
+	// TODO
 }
 
 void write_statistics(struct main_data *data)
 {
+	// TODO
 }
 
 void destroy_memory_buffers(struct main_data *data, struct communication_buffers *buffers)
