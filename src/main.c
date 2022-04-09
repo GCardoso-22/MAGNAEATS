@@ -1,3 +1,8 @@
+/* SO-043
+Diogo Chambel - 53319
+Gonçalo Cardoso - 54415
+Pedro Correia - 54570
+*/
 #include "main.h"
 #include "memory.h"
 #include "process.h"
@@ -44,8 +49,8 @@ void main_args(int argc, char *argv[], struct main_data *data)
 	}
 	else
 	{
-		printf("Insira os dados necessários");
-		printf("magnaeats max_ops buffers_size n_restaurants n_drivers n_clients");
+		printf("Insira os dados necessários\n");
+		printf("magnaeats max_ops buffers_size n_restaurants n_drivers n_clients\n");
 		exit(0);
 	}
 }
@@ -140,13 +145,14 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 {
 	if (*op_counter < data->max_ops)
 	{
-		struct operation *newOp;
-		newOp->id = *op_counter;
+		struct operation op;
+		op.id = *op_counter;
+//ta mal
 
 		write_main_rest_buffer(buffers->main_rest, data->buffers_size, newOp);
 		printf("Pedido #%d concluido!\n", *op_counter);
 		printf("O pedido #%d foi criado!\n", *op_counter);
-		*op_counter++;
+		(*op_counter)++;
 	}
 	else
 	{
@@ -156,8 +162,7 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 
 void read_status(struct main_data *data)
 {
-	int op;
-	scanf("%d", op);
+	int op = scanf("%d", &op);
 	for (int i = 0; i <= data->max_ops; i++)
 	{
 		if (op == i)
@@ -165,7 +170,7 @@ void read_status(struct main_data *data)
 			printf("Op %d com estado %c foi ", i, data->results[i].status);
 			printf("pedida pelo cliente %d, ", data->results[i].requesting_client);
 			printf("requesitada pelo restaurante %d, ", data->results[i].requested_rest);
-			printf("com o nome do prato pedido %d!", data->results[i].requested_dish);
+			printf("com o nome do prato pedido %s!", data->results[i].requested_dish);
 			printf("foi recebido pelo restaurante %d, ", data->results[i].receiving_rest);
 			printf("entregue pelo motorista %d, ", data->results[i].receiving_driver);
 			printf("e recebido pelo cliente %d!\n", data->results[i].receiving_client);
@@ -173,7 +178,7 @@ void read_status(struct main_data *data)
 		}
 		else if (i == data->max_ops)
 		{
-			printf("Op %ls ainda não é valida\n", op);
+			printf("Op %d ainda não é valida\n", op);
 			break;
 		}
 	}
@@ -181,9 +186,12 @@ void read_status(struct main_data *data)
 
 void stop_execution(struct main_data *data, struct communication_buffers *buffers)
 {
-	*data->terminate = 1;
+	*(data->terminate) = 1;
+	printf("yo");
 	wait_processes(data);
+	printf("yo1");
 	write_statistics(data);
+	printf("yo2");
 	destroy_memory_buffers(data, buffers);
 }
 

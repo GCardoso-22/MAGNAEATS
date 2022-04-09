@@ -28,20 +28,20 @@ void *create_shared_memory(char *name, int size)
 
 	if (sm == -1)
 	{
-		perror(name);
+		perror(processName);
 		exit(1);
 	}
 	ret = ftruncate(sm, size);
 	if (ret == -1)
 	{
-		perror(name);
+		perror(processName);
 		exit(2);
 	}
 
 	ptr = (int *)mmap(0, size, PROT_READ | PROT_WRITE, MAP_SHARED, sm, 0);
 	if (ptr == MAP_FAILED)
 	{
-		perror(("/%s-mmap", name));
+		perror(processName);
 		exit(3);
 	}
 	return ptr;
