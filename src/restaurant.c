@@ -39,7 +39,10 @@ void restaurant_receive_operation(struct operation *op, int rest_id, struct comm
     {
         return;
     }
-    read_main_rest_buffer(buffers->main_rest, rest_id, data->buffers_size, op);
+    else
+    {
+        read_main_rest_buffer(buffers->main_rest, rest_id, data->buffers_size, op);
+    }
 }
 
 void restaurant_process_operation(struct operation *op, int rest_id, struct main_data *data, int *counter)

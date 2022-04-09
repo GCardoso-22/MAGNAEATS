@@ -37,7 +37,10 @@ void client_get_operation(struct operation *op, int client_id, struct communicat
     {
         return;
     }
-    read_driver_client_buffer(buffers->driv_cli, client_id, data->buffers_size, op);
+    else
+    {
+        read_driver_client_buffer(buffers->driv_cli, client_id, data->buffers_size, op);
+    }
 }
 
 void client_process_operation(struct operation *op, int client_id, struct main_data *data, int *counter)
