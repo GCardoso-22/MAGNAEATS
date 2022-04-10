@@ -2,36 +2,21 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target 'all'.  Stop.
 
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Sun Apr 10 14:30:53 2022
- 
+# Make data base, printed on Sun Apr 10 17:54:01 2022
 
 # Variables
- 
 
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
 # environment
 DESKTOP_SESSION = ubuntu
@@ -62,11 +47,11 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-_ = /usr/bin/dbus-update-activation-environment
+_ = /usr/share/code/code
 # makefile (from 'makefile', line 14)
 CFLAGS = -g -Wall -I $(INC_DIR)
 # environment
-JOURNAL_STREAM = 8:30446
+JOURNAL_STREAM = 8:30935
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
@@ -76,7 +61,7 @@ MAKEFILE_LIST :=  makefile
 # makefile (from 'makefile', line 23)
 driver.o = memory.h main.h driver.h
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/github-desktop.desktop
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # environment
 USERNAME = ged
 # environment
@@ -90,11 +75,11 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 LC_CTYPE = pt_PT.UTF-8
 # makefile (from 'makefile', line 21)
-process.o = memory.h main.h process.h
+process.o = memory.h main.h process.h client.h restaurant.h driver.h
 # environment
-MANAGERPID = 1039
+MANAGERPID = 1012
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d602b779-3e1d-4d30-8f48-3d7d2d790ce6.sock
+LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 LC_NAME = pt_PT.UTF-8
 # environment
@@ -108,11 +93,11 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/Ged:@/tmp/.ICE-unix/1333,unix/Ged:/tmp/.ICE-unix/1333
+SESSION_MANAGER = local/Ged:@/tmp/.ICE-unix/1298,unix/Ged:/tmp/.ICE-unix/1298
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # makefile (from 'makefile', line 22)
-client.o = memory.h main.h client.h 
+client.o = memory.h main.h client.h 	
 # makefile (from 'makefile', line 7)
 OBJ_dir = obj
 # environment
@@ -122,15 +107,17 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = fa75b33642f5468abbdef8519399f595
+INVOCATION_ID = aac46d845e5e4c5e82c36fa825ea6776
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = 
 # environment
 XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1753
+GIO_LAUNCHED_DESKTOP_FILE_PID = 9626
 # automatic
 %F = $(notdir $%)
 # environment
@@ -142,9 +129,9 @@ PWD = /home/ged/Faculdade/SO/MAGNAEATS
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1259
+SSH_AGENT_PID = 1228
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = Unity
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'makefile', line 10)
 INC_DIR = include
 # environment
@@ -154,7 +141,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /home/ged
 # environment
-VSCODE_CLI = 1
+LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 VSCODE_CODE_CACHE_PATH = /home/ged/.config/Code/CachedData/e18005f0f1b33c29e81d732535d8c0e47cafb0b5
 # environment
@@ -163,8 +150,6 @@ LOGNAME = ged
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 +F = $(notdir $+)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
@@ -181,12 +166,12 @@ MAKECMDGOALS := all
 QT_IM_MODULE = ibus
 # environment
 SHLVL = 0
-# environment
-LOCAL_GIT_DIRECTORY = /usr/lib/github-desktop/resources/app/git
 # makefile (from 'makefile', line 12)
 CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a2245997-455a-4470-b0ce-7d322bf9f042.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -232,7 +217,7 @@ LC_NUMERIC = pt_PT.UTF-8
 # automatic
 <F = $(notdir $<)
 # makefile (from 'makefile', line 19)
-main.o = memory.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h
 # environment
 LC_MEASUREMENT = pt_PT.UTF-8
 # environment
@@ -268,9 +253,9 @@ LANG = C
 # makefile (from 'makefile', line 9)
 SRC_dir = src
 # environment
-VSCODE_PID = 1957
+VSCODE_PID = 9626
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=25/150=17%
+# Load=121/1024=12%, Rehash=0, Collisions=23/150=15%
 
 # Pattern-specific Variable Values
 
@@ -287,7 +272,7 @@ VSCODE_PID = 1957
 
 %.o: src/%.c
 #  recipe to execute (from 'makefile', line 31):
-	$(CC) $(CFLAGS) $(INC_DIR) -o $(OBJ_dir)/$@ -c $<
+	$(CC) $(CFLAGS) -o $(OBJ_dir)/$@ -c $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
@@ -302,6 +287,7 @@ clear:
 	rm -f $(BIN_dir)/magnaeats
 
 # Not a target:
+ 
 all:
 #  Command line target.
 #  Implicit rule search has been done.
@@ -311,9 +297,7 @@ all:
 # Not a target:
 client.o:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 # Not a target:
@@ -338,7 +322,7 @@ magnaeats: main.o memory.o process.o client.o driver.o restaurant.o
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-10 14:30:50.659511845
+#  Last modified 2022-04-10 15:29:05.754210045
 #  File has been updated.
 #  Successfully updated.
 
@@ -380,6 +364,6 @@ memory.o:
 # strcache performance: lookups = 33 / hit rate = 21%
 # hash-table stats:
 # Load=26/8192=0%, Rehash=0, Collisions=1/33=3%
-# Finished Make data base on Sun Apr 10 14:30:53 2022
+# Finished Make data base on Sun Apr 10 17:54:01 2022
 
  

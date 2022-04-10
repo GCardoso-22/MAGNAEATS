@@ -116,7 +116,8 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 		scanf("%s", cmd);
 		if (strcasecmp(cmd, "request") == 0)
 		{
-			create_request(opCounter, buffers, data);
+			printf("banger pedido\n");
+			create_request(&opCounter, buffers, data);
 		}
 		else if (strcasecmp(cmd, "status") == 0)
 		{
@@ -124,11 +125,12 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 		}
 		else if (strcasecmp(cmd, "stop") == 0)
 		{
+			printf("Parei (menti)\n");
 			stop_execution(data, buffers);
 		}
 		else if (strcasecmp(cmd, "help") == 0)
 		{
-			printf("Modo de funcionamento:\n");
+			printf("\nModo de funcionamento:\n");
 			printf("	request <cliente> <restaurante> <prato> - fazer uma encomenda.\n");
 			printf("	status <id> - consultar o estado do pedido especificado pelo id.\n");
 			printf("	stop - terminar a execução do MagnaEats.\n");
@@ -143,23 +145,31 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 
 void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data)
 {
-	printf("cringe");
+	printf("cringe\n");
+	printf("%d\n", *op_counter);
 	if (*op_counter < data->max_ops)
 	{
 		int requestingClient = 0;
 		int requestedRest = 0;
-		char *requestedDish = "";
+		char requestedDish[20];
 		struct operation op;
 
-		scanf("%d %d %s", &requestingClient, &requestedRest, requestedDish);
+		printf("scan buffo\n");
+		scanf("%d %d %20s", &requestingClient, &requestedRest, requestedDish);
+		printf("dps can\n");
 
 		op.id = *op_counter;
 		op.requesting_client = requestingClient;
 		op.requested_rest = requestedRest;
 		op.requested_dish = requestedDish;
-		// ta mal
+
+		// printf("%d\n", op.id);
+		// printf("%d\n", op.requesting_client);
+		// printf("%d\n", op.requested_rest);
+		// printf("%s\n", op.requested_dish);
 
 		write_main_rest_buffer(buffers->main_rest, data->buffers_size, &op);
+
 		printf("Pedido #%d concluido!\n", *op_counter);
 		printf("O pedido #%d foi criado!\n", *op_counter);
 		(*op_counter)++;
@@ -196,13 +206,15 @@ void read_status(struct main_data *data)
 
 void stop_execution(struct main_data *data, struct communication_buffers *buffers)
 {
+	printf("entrei no stop\n");
 	*(data->terminate) = 1;
-	printf("yo");
-	//wait_processes(data);
-	printf("yo1");
-	//write_statistics(data);
+	printf("yo\n");
+	wait_processes(data);
+	printf("yo1\n");
+	write_statistics(data);
 	printf("yo2");
 	destroy_memory_buffers(data, buffers);
+	//
 }
 
 void wait_processes(struct main_data *data)
