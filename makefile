@@ -16,10 +16,10 @@ LIBS = -lm -lrt -lpthread
 
 OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o
 
-main.o = memory.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h
 memory.o = memory.h
-process.o = memory.h main.h process.h
-client.o = memory.h main.h client.h 
+process.o = memory.h main.h process.h client.h restaurant.h driver.h
+client.o = memory.h main.h client.h 	
 driver.o =  memory.h main.h driver.h
 restaurant.o = memory.h main.h restaurant.h
 
