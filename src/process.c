@@ -12,6 +12,9 @@ Pedro Correia - 54570
 #include "memory.h"
 #include "main.h"
 #include "process.h"
+#include "restaurant.h"
+#include "client.h"
+#include "driver.h"
 
 /* Função que inicia um novo processo restaurante através da função fork do SO. O novo
  * processo irá executar a função execute_restaurant respetiva, fazendo exit do retorno.
@@ -48,8 +51,7 @@ int launch_driver(int driver_id, struct communication_buffers *buffers, struct m
 
     if (pid == 0)
     {
-        execute_driver(driver_id, buffers, data);
-        exit(4);
+        exit(execute_driver(driver_id, buffers, data));
     }
     else
     {
@@ -69,8 +71,7 @@ int launch_client(int client_id, struct communication_buffers *buffers, struct m
 
     if (pid == 0)
     {
-        execute_client(client_id, buffers, data);
-        exit(5);
+        exit(execute_client(client_id, buffers, data));
     }
     else
     {
