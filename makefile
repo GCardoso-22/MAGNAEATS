@@ -28,7 +28,7 @@ magnaeats: $(OBJECTS)
 	$(CC) $(addprefix $(OBJ_dir)/,$(OBJECTS)) -o $(BIN_dir)/magnaeats $(LIBS)
 
 %.o: $(SRC_dir)/%.c $($@)
-	$(CC) $(CFLAGS) $(INC_DIR) -o $(OBJ_dir)/$@ -c $<
+	$(CC) $(CFLAGS) -o $(OBJ_dir)/$@ -c $<
 
 clear:
 	rm -f $(OBJ_dir)/*.o
