@@ -143,12 +143,12 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 
 void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data)
 {
-	// printf("cringe");
+	printf("cringe");
 	if (*op_counter < data->max_ops)
 	{
 		int requestingClient = 0;
 		int requestedRest = 0;
-		char *requestedDish;
+		char *requestedDish = "";
 		struct operation op;
 
 		scanf("%d %d %s", &requestingClient, &requestedRest, requestedDish);
