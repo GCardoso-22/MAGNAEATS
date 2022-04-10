@@ -104,11 +104,11 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 {
 	char cmd[8];
 	int *opCounter = 0;
-	printf("Modo de funcionamento:\n");
-	printf("	request <cliente> <restaurante> <prato> - fazer uma encomenda.\n");
-	printf("	status <id> - consultar o estado do pedido especificado pelo id.\n");
-	printf("	stop - terminar a execução do MagnaEats.\n");
-	printf("	help - informações de ajuda sobre as várias opções.\n");
+	printf("Selecione uma opção:\n");
+	printf("	request\n");
+	printf("	status\n");
+	printf("	stop\n");
+	printf("	help \n");
 	// falta acabar
 	while (1)
 	{
@@ -198,9 +198,9 @@ void stop_execution(struct main_data *data, struct communication_buffers *buffer
 {
 	*(data->terminate) = 1;
 	printf("yo");
-	wait_processes(data);
+	//wait_processes(data);
 	printf("yo1");
-	write_statistics(data);
+	//write_statistics(data);
 	printf("yo2");
 	destroy_memory_buffers(data, buffers);
 }
