@@ -86,7 +86,8 @@ int wait_process(int process_id)
     waitpid(process_id, &status, 0);
 
     if (WIFEXITED(status))
+    {
         return WEXITSTATUS(status);
-
-    return 0;
+    }
+    return -1;
 }

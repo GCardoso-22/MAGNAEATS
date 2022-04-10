@@ -20,7 +20,7 @@ int execute_client(int client_id, struct communication_buffers *buffers, struct 
         {
             // ignored
         }
-        else if (data->terminate == 0)
+        else if (*data->terminate == 0)
         {
             client_process_operation(&op, client_id, data, data->client_stats);
         }

@@ -10,7 +10,6 @@ Pedro Correia - 54570
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <unistd.h>
-
 #include "memory.h"
 
 void *create_shared_memory(char *name, int size)

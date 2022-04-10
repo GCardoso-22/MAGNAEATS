@@ -21,7 +21,7 @@ int execute_restaurant(int rest_id, struct communication_buffers *buffers, struc
         {
             // ignored
         }
-        else if (data->terminate == 0)
+        else if (*data->terminate == 0)
         {
             restaurant_process_operation(&op, rest_id, data, data->restaurant_stats);
             restaurant_forward_operation(&op, buffers, data);

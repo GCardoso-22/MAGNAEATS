@@ -63,7 +63,7 @@ void create_dynamic_memory_buffers(struct main_data *data)
 
 	data->client_stats = create_dynamic_memory(sizeof(int));
 	data->driver_stats = create_dynamic_memory(sizeof(int));
-	data->restaurant_pids = create_dynamic_memory(sizeof(int));
+	data->restaurant_stats = create_dynamic_memory(sizeof(int));
 }
 
 void create_shared_memory_buffers(struct main_data *data, struct communication_buffers *buffers)
@@ -116,7 +116,7 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 		scanf("%s", cmd);
 		if (strcasecmp(cmd, "request") == 0)
 		{
-			printf("banger pedido\n");
+			// printf("banger pedido\n");
 			create_request(&opCounter, buffers, data);
 		}
 		else if (strcasecmp(cmd, "status") == 0)
@@ -127,6 +127,7 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 		{
 			printf("Parei (menti)\n");
 			stop_execution(data, buffers);
+			break;
 		}
 		else if (strcasecmp(cmd, "help") == 0)
 		{
@@ -145,8 +146,8 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 
 void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data)
 {
-	printf("cringe\n");
-	printf("%d\n", *op_counter);
+	// printf("cringe\n");
+	// printf("%d\n", *op_counter);
 	if (*op_counter < data->max_ops)
 	{
 		int requestingClient = 0;
@@ -154,9 +155,9 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 		char requestedDish[20];
 		struct operation op;
 
-		printf("scan buffo\n");
+		// printf("scan buffo\n");
 		scanf("%d %d %20s", &requestingClient, &requestedRest, requestedDish);
-		printf("dps can\n");
+		// printf("dps can\n");
 
 		op.id = *op_counter;
 		op.requesting_client = requestingClient;
@@ -170,7 +171,6 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 
 		write_main_rest_buffer(buffers->main_rest, data->buffers_size, &op);
 
-		printf("Pedido #%d concluido!\n", *op_counter);
 		printf("O pedido #%d foi criado!\n", *op_counter);
 		(*op_counter)++;
 	}
@@ -182,37 +182,33 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 
 void read_status(struct main_data *data)
 {
-	int op = scanf("%d", &op);
-	for (int i = 0; i <= data->max_ops; i++)
+	int id;
+	scanf("%d", &id);
+	int check = 0;
+
+	for (int i = 0; i < data->max_ops; i++)
 	{
-		if (op == i)
+		if (id == data->results[i].id)
 		{
-			printf("Op %d com estado %c foi ", i, data->results[i].status);
-			printf("pedida pelo cliente %d, ", data->results[i].requesting_client);
-			printf("requesitada pelo restaurante %d, ", data->results[i].requested_rest);
-			printf("com o nome do prato pedido %s!", data->results[i].requested_dish);
-			printf("foi recebido pelo restaurante %d, ", data->results[i].receiving_rest);
-			printf("entregue pelo motorista %d, ", data->results[i].receiving_driver);
-			printf("e recebido pelo cliente %d!\n", data->results[i].receiving_client);
-			break;
+			printf("Pedido #%d com estado %c requisitado pelo cliente %d ao restaurante %d com o prato %s,ainda não foi recebido no restaurante!\n",
+				   id, data->results[id].status, data->results[id].requesting_client, data->results[id].requested_rest, data->results[id].requested_dish);
+			check = 1;
 		}
-		else if (i == data->max_ops)
-		{
-			printf("Op %d ainda não é valida\n", op);
-			break;
-		}
+	}
+	if (check != 1)
+	{
+		printf("O pedido %d ainda não é válido", id);
 	}
 }
 
 void stop_execution(struct main_data *data, struct communication_buffers *buffers)
 {
-	printf("entrei no stop\n");
 	*(data->terminate) = 1;
-	printf("yo\n");
+	// printf("yo\n");
 	wait_processes(data);
-	printf("yo1\n");
+	// printf("yo1\n");
 	write_statistics(data);
-	printf("yo2");
+	// printf("yo2");
 	destroy_memory_buffers(data, buffers);
 	//
 }
@@ -232,22 +228,22 @@ void wait_processes(struct main_data *data)
 	// restaurants
 	for (int r = 0; r < data->n_restaurants; r++)
 	{
-		data->restaurant_stats[r] = wait_process(data->restaurant_stats[r]);
+		data->restaurant_stats[r] = wait_process(data->restaurant_pids[r]);
 	}
 }
 
 void write_statistics(struct main_data *data)
 {
-	printf("Processar estatísticas:\n");
+	printf("Terminando o MAGNAEATS! Imprimindo estatísticas:\n");
 	// clients
 	for (int c = 0; c < data->n_restaurants; c++)
 	{
-		printf("Restaurante %d encaminhou %d pedidos!\n", c, data->restaurant_stats[c]);
+		printf("Restaurante %d preparou %d pedidos!\n", c, data->restaurant_stats[c]);
 	}
 	// drivers
 	for (int d = 0; d < data->n_drivers; d++)
 	{
-		printf("Mororista %d respondeu %d pedidos!\n", d, data->driver_stats[d]);
+		printf("Motorista %d entregou %d pedidos!\n", d, data->driver_stats[d]);
 	}
 	// restaurants
 	for (int r = 0; r < data->n_clients; r++)
@@ -264,7 +260,7 @@ void destroy_memory_buffers(struct main_data *data, struct communication_buffers
 
 	destroy_dynamic_memory(data->client_stats);
 	destroy_dynamic_memory(data->driver_stats);
-	destroy_dynamic_memory(data->restaurant_pids);
+	destroy_dynamic_memory(data->restaurant_stats);
 
 	destroy_shared_memory(STR_SHM_DRIVER_CLIENT_BUFFER, buffers->driv_cli->buffer, data->buffers_size * sizeof(struct operation));
 	destroy_shared_memory(STR_SHM_DRIVER_CLIENT_PTR, buffers->driv_cli->ptrs, data->buffers_size * sizeof(int));
