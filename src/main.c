@@ -143,13 +143,23 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 
 void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data)
 {
+	printf("cringe");
 	if (*op_counter < data->max_ops)
 	{
+		int requestingClient = 0;
+		int requestedRest = 0;
+		char *requestedDish;
 		struct operation op;
-		op.id = *op_counter;
-//ta mal
 
-		write_main_rest_buffer(buffers->main_rest, data->buffers_size, newOp);
+		scanf("%d %d %s", &requestingClient, &requestedRest, requestedDish);
+
+		op.id = *op_counter;
+		op.requesting_client = requestingClient;
+		op.requested_rest = requestedRest;
+		op.requested_dish = requestedDish;
+		// ta mal
+
+		write_main_rest_buffer(buffers->main_rest, data->buffers_size, &op);
 		printf("Pedido #%d concluido!\n", *op_counter);
 		printf("O pedido #%d foi criado!\n", *op_counter);
 		(*op_counter)++;

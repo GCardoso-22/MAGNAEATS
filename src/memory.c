@@ -50,6 +50,7 @@ void *create_shared_memory(char *name, int size)
 void *create_dynamic_memory(int size)
 {
 	void *dm = malloc(size);
+
 	if (dm == NULL)
 	{
 		perror("dm");
@@ -57,6 +58,8 @@ void *create_dynamic_memory(int size)
 	}
 
 	dm = memset(dm, 0, size);
+
+	return dm;
 }
 
 void destroy_shared_memory(char *name, void *ptr, int size)

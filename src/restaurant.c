@@ -26,16 +26,16 @@ int execute_restaurant(int rest_id, struct communication_buffers *buffers, struc
             restaurant_process_operation(&op, rest_id, data, data->restaurant_stats);
             restaurant_forward_operation(&op, buffers, data);
         }
-        else if (data->terminate == 1)
+        else if (*data->terminate == 1)
         {
-            return data->restaurant_stats;
+            return *data->restaurant_stats;
         }
     }
 }
 
 void restaurant_receive_operation(struct operation *op, int rest_id, struct communication_buffers *buffers, struct main_data *data)
 {
-    if (data->terminate == 1)
+    if (*data->terminate == 1)
     {
         return;
     }
@@ -49,7 +49,7 @@ void restaurant_process_operation(struct operation *op, int rest_id, struct main
 {
     op->receiving_rest = rest_id;
     op->status = 'R';
-    *counter++;
+    (*counter)++;
     data->results[op->id] = *op;
 }
 

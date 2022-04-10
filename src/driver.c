@@ -21,21 +21,21 @@ int execute_driver(int driver_id, struct communication_buffers *buffers, struct 
         {
             // ignored
         }
-        else if (data->terminate == 0)
+        else if (*data->terminate == 0)
         {
             driver_process_operation(&op, driver_id, data, data->driver_stats);
             driver_send_answer(&op, buffers, data);
         }
-        else if (data->terminate == 1)
+        else if (*data->terminate == 1)
         {
-            return data->driver_stats;
+            return *data->driver_stats;
         }
     }
 }
 
 void driver_receive_operation(struct operation *op, struct communication_buffers *buffers, struct main_data *data)
 {
-    if (data->terminate == 1)
+    if (*data->terminate == 1)
     {
         return;
     }
@@ -49,7 +49,7 @@ void driver_process_operation(struct operation *op, int driver_id, struct main_d
 {
     op->receiving_driver = driver_id;
     op->status = 'D';
-    *counter++;
+    (*counter)++;
     data->results[op->id] = *op;
 }
 
