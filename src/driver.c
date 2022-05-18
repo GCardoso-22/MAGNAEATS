@@ -9,6 +9,7 @@ Pedro Correia - 54570
 #include "memory.h"
 #include "main.h"
 #include "driver.h"
+#include "synchronization.h"
 
 int execute_driver(int driver_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {

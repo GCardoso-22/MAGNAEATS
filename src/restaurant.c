@@ -9,6 +9,7 @@ Pedro Correia - 54570
 #include "memory.h"
 #include "main.h"
 #include "restaurant.h"
+#include "synchronization.h"
 
 int execute_restaurant(int rest_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {

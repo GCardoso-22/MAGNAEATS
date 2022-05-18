@@ -7,6 +7,7 @@ Pedro Correia - 54570
 #include <stdio.h>
 #include <stdlib.h>
 #include "client.h"
+#include "synchronization.h"
 
 int execute_client(int client_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {

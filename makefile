@@ -14,14 +14,13 @@ CC = gcc
 CFLAGS = -g -Wall -I $(INC_DIR)
 LIBS = -lm -lrt -lpthread
 
-OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o
+OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o
 
-main.o = main.h memory.h process.h client.h driver.h restaurant.h
-memory.o = memory.h
-process.o = memory.h main.h process.h client.h restaurant.h driver.h
-client.o = memory.h main.h client.h 	
-driver.o =  memory.h main.h driver.h
-restaurant.o = memory.h main.h restaurant.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h synchronization.h
+process.o = memory.h main.h process.h client.h restaurant.h driver.h synchronization.h
+client.o = memory.h main.h client.h synchronization.h
+driver.o =  memory.h main.h driver.h synchronization.h
+restaurant.o = memory.h main.h restaurant.h synchronization.h
 
 
 magnaeats: $(OBJECTS)
