@@ -9,6 +9,7 @@ Pedro Correia - 54570
 #include "client.h"
 #include "driver.h"
 #include "restaurant.h"
+#include "synchronization.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,12 +23,19 @@ int main(int argc, char *argv[])
 	buffers->rest_driv = create_dynamic_memory(sizeof(struct circular_buffer));
 	buffers->driv_cli = create_dynamic_memory(sizeof(struct rnd_access_buffer));
 
+	// init semaphore data structure
+	struct semaphores *sems = create_dynamic_memory(sizeof(struct semaphores));
+	sems->main_rest = create_dynamic_memory(sizeof(struct prodcons));
+	sems->rest_driv = create_dynamic_memory(sizeof(struct prodcons));
+	sems->driv_cli = create_dynamic_memory(sizeof(struct prodcons));
+
 	// execute main code
 	main_args(argc, argv, data);
 	create_dynamic_memory_buffers(data);
 	create_shared_memory_buffers(data, buffers);
-	launch_processes(buffers, data);
-	user_interaction(buffers, data);
+	create_semaphores(data, sems);
+	launch_processes(buffers, data, sems);
+	user_interaction(buffers, data, sems);
 
 	// release memory before terminating
 	destroy_dynamic_memory(data);
@@ -35,6 +43,10 @@ int main(int argc, char *argv[])
 	destroy_dynamic_memory(buffers->rest_driv);
 	destroy_dynamic_memory(buffers->driv_cli);
 	destroy_dynamic_memory(buffers);
+	destroy_dynamic_memory(sems->main_rest);
+	destroy_dynamic_memory(sems->rest_driv);
+	destroy_dynamic_memory(sems->driv_cli);
+	destroy_dynamic_memory(sems);
 }
 
 void main_args(int argc, char *argv[], struct main_data *data)
@@ -81,34 +93,34 @@ void create_shared_memory_buffers(struct main_data *data, struct communication_b
 	data->terminate = create_shared_memory(STR_SHM_TERMINATE, sizeof(int *));
 }
 
-void launch_processes(struct communication_buffers *buffers, struct main_data *data)
+void launch_processes(struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
 	// clients
 	for (int c = 0; c < data->n_clients; c++)
 	{
-		data->client_pids[c] = launch_client(c, buffers, data);
+		data->client_pids[c] = launch_client(c, buffers, data, sems);
 	}
 	// drivers
 	for (int d = 0; d < data->n_drivers; d++)
 	{
-		data->driver_pids[d] = launch_driver(d, buffers, data);
+		data->driver_pids[d] = launch_driver(d, buffers, data, sems);
 	}
 	// restaurants
 	for (int r = 0; r < data->n_restaurants; r++)
 	{
-		data->restaurant_pids[r] = launch_restaurant(r, buffers, data);
+		data->restaurant_pids[r] = launch_restaurant(r, buffers, data, sems);
 	}
 }
 
-void user_interaction(struct communication_buffers *buffers, struct main_data *data)
+void user_interaction(struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
 	char cmd[8];
-	int *opCounter = 0;
+	int opCounter = 0;
 	printf("\nModo de funcionamento:\n");
-			printf("	request <cliente> <restaurante> <prato> - fazer uma encomenda.\n");
-			printf("	status <id> - consultar o estado do pedido especificado pelo id.\n");
-			printf("	stop - terminar a execução do MagnaEats.\n");
-			printf("	help - informações de ajuda sobre as várias opções.\n");
+	printf("	request <cliente> <restaurante> <prato> - fazer uma encomenda.\n");
+	printf("	status <id> - consultar o estado do pedido especificado pelo id.\n");
+	printf("	stop - terminar a execução do MagnaEats.\n");
+	printf("	help - informações de ajuda sobre as várias opções.\n");
 	// falta acabar
 	while (1)
 	{
@@ -117,16 +129,16 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 		if (strcasecmp(cmd, "request") == 0)
 		{
 			// printf("banger pedido\n");
-			create_request(&opCounter, buffers, data);
+			create_request(&opCounter, buffers, data, sems);
 		}
 		else if (strcasecmp(cmd, "status") == 0)
 		{
-			read_status(data);
+			read_status(data, sems);
 		}
 		else if (strcasecmp(cmd, "stop") == 0)
 		{
 			printf("Parei (menti)\n");
-			stop_execution(data, buffers);
+			stop_execution(data, buffers, sems);
 			break;
 		}
 		else if (strcasecmp(cmd, "help") == 0)
@@ -144,7 +156,7 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 	}
 }
 
-void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data)
+void create_request(int *op_counter, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
 	// printf("cringe\n");
 	// printf("%d\n", *op_counter);
@@ -168,8 +180,9 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 		// printf("%d\n", op.requesting_client);
 		// printf("%d\n", op.requested_rest);
 		// printf("%s\n", op.requested_dish);
-
+		produce_begin(sems->main_rest);
 		write_main_rest_buffer(buffers->main_rest, data->buffers_size, &op);
+		produce_end(sems->main_rest);
 
 		printf("O pedido #%d foi criado!\n", *op_counter);
 		(*op_counter)++;
@@ -180,10 +193,11 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 	}
 }
 
-void read_status(struct main_data *data)
+void read_status(struct main_data *data, struct semaphores *sems)
 {
 	int id;
 	scanf("%d", &id);
+	semaphore_mutex_lock(sems->results_mutex);
 	int check = 0;
 
 	for (int i = 0; i < data->max_ops; i++)
@@ -198,17 +212,22 @@ void read_status(struct main_data *data)
 	if (check != 1)
 	{
 		printf("O pedido %d ainda não é válido", id);
+		semaphore_mutex_unlock(sems->results_mutex);
 	}
 }
 
-void stop_execution(struct main_data *data, struct communication_buffers *buffers)
+void stop_execution(struct main_data *data, struct communication_buffers *buffers, struct semaphores *sems)
 {
 	*(data->terminate) = 1;
 	// printf("yo\n");
+	wakeup_processes(data, sems);
+
 	wait_processes(data);
 	// printf("yo1\n");
 	write_statistics(data);
 	// printf("yo2");
+	destroy_semaphores(sems);
+
 	destroy_memory_buffers(data, buffers);
 	//
 }
@@ -273,4 +292,49 @@ void destroy_memory_buffers(struct main_data *data, struct communication_buffers
 
 	destroy_shared_memory(STR_SHM_RESULTS, data->results, data->buffers_size * sizeof(struct operation));
 	destroy_shared_memory(STR_SHM_TERMINATE, data->terminate, sizeof(int *));
+}
+
+void create_semaphores(struct main_data *data, struct semaphores *sems)
+{
+	sems->main_rest->full = semaphore_create(STR_SEM_MAIN_REST_FULL, 0);
+	sems->main_rest->empty = semaphore_create(STR_SEM_MAIN_REST_EMPTY, data->buffers_size);
+	sems->main_rest->mutex = semaphore_create(STR_SEM_MAIN_REST_MUTEX, 1);
+
+	sems->rest_driv->full = semaphore_create(STR_SEM_REST_DRIV_FULL, 0);
+	sems->rest_driv->empty = semaphore_create(STR_SEM_REST_DRIV_EMPTY, data->buffers_size);
+	sems->rest_driv->mutex = semaphore_create(STR_SEM_REST_DRIV_MUTEX, 1);
+
+	sems->driv_cli->full = semaphore_create(STR_SEM_DRIV_CLI_FULL, 0);
+	sems->driv_cli->empty = semaphore_create(STR_SEM_DRIV_CLI_EMPTY, data->buffers_size);
+	sems->driv_cli->mutex = semaphore_create(STR_SEM_DRIV_CLI_MUTEX, 1);
+
+	sems->results_mutex = semaphore_create(STR_SEM_RESULTS_MUTEX, 1);
+}
+
+void wakeup_processes(struct main_data *data, struct semaphores *sems)
+{
+	for (int i = 0; i < data->max_ops; i++)
+	{
+		produce_end(sems->main_rest);
+		produce_end(sems->rest_driv);
+		produce_end(sems->driv_cli);
+		semaphore_mutex_unlock(sems->results_mutex);
+	}
+}
+
+void destroy_semaphores(struct semaphores *sems)
+{
+	semaphore_destroy(STR_SEM_MAIN_REST_FULL, sems->main_rest->full);
+	semaphore_destroy(STR_SEM_MAIN_REST_EMPTY, sems->main_rest->empty);
+	semaphore_destroy(STR_SEM_MAIN_REST_MUTEX, sems->main_rest->mutex);
+
+	semaphore_destroy(STR_SEM_REST_DRIV_FULL, sems->rest_driv->full);
+	semaphore_destroy(STR_SEM_REST_DRIV_EMPTY, sems->rest_driv->empty);
+	semaphore_destroy(STR_SEM_REST_DRIV_MUTEX, sems->rest_driv->mutex);
+
+	semaphore_destroy(STR_SEM_DRIV_CLI_FULL, sems->driv_cli->full);
+	semaphore_destroy(STR_SEM_DRIV_CLI_EMPTY, sems->driv_cli->empty);
+	semaphore_destroy(STR_SEM_DRIV_CLI_MUTEX, sems->driv_cli->mutex);
+
+	semaphore_destroy(STR_SEM_RESULTS_MUTEX, sems->results_mutex);
 }

@@ -10,12 +10,12 @@ Pedro Correia - 54570
 #include "main.h"
 #include "restaurant.h"
 
-int execute_restaurant(int rest_id, struct communication_buffers *buffers, struct main_data *data)
+int execute_restaurant(int rest_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
     struct operation op;
     while (1)
     {
-        restaurant_receive_operation(&op, rest_id, buffers, data);
+        restaurant_receive_operation(&op, rest_id, buffers, data, sems);
 
         if (op.id == -1)
         {
@@ -23,8 +23,8 @@ int execute_restaurant(int rest_id, struct communication_buffers *buffers, struc
         }
         else if (*data->terminate == 0)
         {
-            restaurant_process_operation(&op, rest_id, data, data->restaurant_stats);
-            restaurant_forward_operation(&op, buffers, data);
+            restaurant_process_operation(&op, rest_id, data, data->restaurant_stats, sems);
+            restaurant_forward_operation(&op, buffers, data, sems);
         }
         else if (*data->terminate == 1)
         {
@@ -33,8 +33,9 @@ int execute_restaurant(int rest_id, struct communication_buffers *buffers, struc
     }
 }
 
-void restaurant_receive_operation(struct operation *op, int rest_id, struct communication_buffers *buffers, struct main_data *data)
+void restaurant_receive_operation(struct operation *op, int rest_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
+    consume_begin(sems->main_rest);
     if (*data->terminate == 1)
     {
         return;
@@ -42,10 +43,11 @@ void restaurant_receive_operation(struct operation *op, int rest_id, struct comm
     else
     {
         read_main_rest_buffer(buffers->main_rest, rest_id, data->buffers_size, op);
+        consume_end(sems->main_rest);
     }
 }
 
-void restaurant_process_operation(struct operation *op, int rest_id, struct main_data *data, int *counter)
+void restaurant_process_operation(struct operation *op, int rest_id, struct main_data *data, int *counter, struct semaphores *sems)
 {
     op->receiving_rest = rest_id;
     op->status = 'R';
@@ -53,7 +55,9 @@ void restaurant_process_operation(struct operation *op, int rest_id, struct main
     data->results[op->id] = *op;
 }
 
-void restaurant_forward_operation(struct operation *op, struct communication_buffers *buffers, struct main_data *data)
+void restaurant_forward_operation(struct operation *op, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
+    produce_begin(sems->rest_driv);
     write_rest_driver_buffer(buffers->rest_driv, data->buffers_size, op);
+    produce_end(sems->rest_driv);
 }
