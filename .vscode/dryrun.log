@@ -1,0 +1,12 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/ged/Faculdade/SO/MAGNAEATS'
+gcc -g -Wall -I include -o obj/main.o -c src/main.c
+gcc -g -Wall -I include -o obj/memory.o -c src/memory.c
+gcc -g -Wall -I include -o obj/process.o -c src/process.c
+gcc -g -Wall -I include -o obj/client.o -c src/client.c
+gcc -g -Wall -I include -o obj/driver.o -c src/driver.c
+gcc -g -Wall -I include -o obj/restaurant.o -c src/restaurant.c
+gcc -g -Wall -I include -o obj/synchronization.o -c src/synchronization.c
+gcc obj/main.o obj/memory.o obj/process.o obj/client.o obj/driver.o obj/restaurant.o obj/synchronization.o -o bin/magnaeats -lm -lrt -lpthread
+make: Leaving directory '/home/ged/Faculdade/SO/MAGNAEATS'
+ 

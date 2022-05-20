@@ -8,6 +8,7 @@ Pedro Correia - 54570
 #include <stdlib.h>
 #include "client.h"
 #include "synchronization.h"
+#include "metime.h"
 
 int execute_client(int client_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
@@ -43,6 +44,7 @@ void client_get_operation(struct operation *op, int client_id, struct communicat
     {
         read_driver_client_buffer(buffers->driv_cli, client_id, data->buffers_size, op);
         consume_end(sems->driv_cli);
+        set_client_end_time(op);
     }
 }
 

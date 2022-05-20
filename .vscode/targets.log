@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 18 16:19:32 2022
+# Make data base, printed on Fri May 20 02:47:54 2022
 
 # Variables
 
@@ -51,15 +49,15 @@ _ = /usr/share/code/code
 # makefile (from 'makefile', line 14)
 CFLAGS = -g -Wall -I $(INC_DIR)
 # environment
-JOURNAL_STREAM = 8:30312
+JOURNAL_STREAM = 8:32853
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
 MAKEFILE_LIST :=  makefile
 # automatic
 @F = $(notdir $@)
-# makefile (from 'makefile', line 23)
-driver.o = memory.h main.h driver.h
+# makefile (from 'makefile', line 22)
+driver.o = memory.h main.h driver.h synchronization.h
 # environment
 GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # environment
@@ -74,10 +72,10 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 VSCODE_VERBOSE_LOGGING = true
 # environment
 LC_CTYPE = pt_PT.UTF-8
-# makefile (from 'makefile', line 21)
-process.o = memory.h main.h process.h client.h restaurant.h driver.h
+# makefile (from 'makefile', line 20)
+process.o = memory.h main.h process.h client.h restaurant.h driver.h synchronization.h
 # environment
-MANAGERPID = 1014
+MANAGERPID = 1032
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -93,11 +91,11 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/Ged:@/tmp/.ICE-unix/1293,unix/Ged:/tmp/.ICE-unix/1293
+SESSION_MANAGER = local/Ged:@/tmp/.ICE-unix/1308,unix/Ged:/tmp/.ICE-unix/1308
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
-# makefile (from 'makefile', line 22)
-client.o = memory.h main.h client.h 	
+# makefile (from 'makefile', line 21)
+client.o = memory.h main.h client.h synchronization.h
 # makefile (from 'makefile', line 7)
 OBJ_dir = obj
 # environment
@@ -107,7 +105,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 769fa1c613a94dbb8f554e88688b932b
+INVOCATION_ID = bc5cb627ed154577afea5ae0f0b9ec61
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -117,7 +115,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 7312
+GIO_LAUNCHED_DESKTOP_FILE_PID = 9351
 # automatic
 %F = $(notdir $%)
 # environment
@@ -129,7 +127,7 @@ PWD = /home/ged/Faculdade/SO/MAGNAEATS
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1238
+SSH_AGENT_PID = 1245
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'makefile', line 10)
@@ -143,7 +141,7 @@ HOME = /home/ged
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-VSCODE_CODE_CACHE_PATH = /home/ged/.config/Code/CachedData/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+VSCODE_CODE_CACHE_PATH = /home/ged/.config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 LOGNAME = ged
 # environment
@@ -171,7 +169,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5972699d-b280-40ca-a473-7db6efcceff4.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-8db37f4d-644f-4711-984c-4444ab8b489b.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -195,7 +193,7 @@ MAKE_COMMAND := make
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-f34ed0e1-1.67.1-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-f34ed0e1-1.67.2-main.sock
 # makefile
 MAKEFLAGS = pqrR
 # environment
@@ -217,7 +215,7 @@ LC_NUMERIC = pt_PT.UTF-8
 # automatic
 <F = $(notdir $<)
 # makefile (from 'makefile', line 19)
-main.o = main.h memory.h process.h client.h driver.h restaurant.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h synchronization.h
 # environment
 LC_MEASUREMENT = pt_PT.UTF-8
 # environment
@@ -228,8 +226,8 @@ GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 LIBS = -lm -lrt -lpthread
 # automatic
 ^F = $(notdir $^)
-# makefile (from 'makefile', line 24)
-restaurant.o = memory.h main.h restaurant.h
+# makefile (from 'makefile', line 23)
+restaurant.o = memory.h main.h restaurant.h synchronization.h
 # default
 SUFFIXES := 
 # environment
@@ -243,9 +241,7 @@ LC_IDENTIFICATION = pt_PT.UTF-8
 # default
 .RECIPEPREFIX := 
 # makefile (from 'makefile', line 17)
-OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o
-# makefile (from 'makefile', line 20)
-memory.o = memory.h
+OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o
 # environment
 LC_ADDRESS = pt_PT.UTF-8
 # environment
@@ -253,9 +249,9 @@ LANG = C
 # makefile (from 'makefile', line 9)
 SRC_dir = src
 # environment
-VSCODE_PID = 7312
+VSCODE_PID = 9351
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=23/150=15%
+# Load=120/1024=12%, Rehash=0, Collisions=23/149=15%
 
 # Pattern-specific Variable Values
 
@@ -271,7 +267,7 @@ VSCODE_PID = 7312
 # Implicit Rules
 
 %.o: src/%.c
-#  recipe to execute (from 'makefile', line 31):
+#  recipe to execute (from 'makefile', line 30):
 	$(CC) $(CFLAGS) -o $(OBJ_dir)/$@ -c $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -281,11 +277,13 @@ VSCODE_PID = 7312
 clear:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 34):
+#  recipe to execute (from 'makefile', line 33):
 	rm -f $(OBJ_dir)/*.o
 	rm -f $(BIN_dir)/magnaeats
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 
 # Not a target:
 all:
@@ -312,19 +310,25 @@ process.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-magnaeats: main.o memory.o process.o client.o driver.o restaurant.o
+magnaeats: main.o memory.o process.o client.o driver.o restaurant.o synchronization.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 28):
+#  recipe to execute (from 'makefile', line 27):
 	$(CC) $(addprefix $(OBJ_dir)/,$(OBJECTS)) -o $(BIN_dir)/magnaeats $(LIBS)
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-10 15:29:05.754210045
+#  Last modified 2022-05-18 19:40:22.663447806
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+synchronization.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -351,20 +355,19 @@ memory.o:
 #  File has not been updated.
 
 # files hash-table stats:
- 
-# Load=12/1024=1%, Rehash=0, Collisions=0/28=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/30=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 26 / storage = 208 B / avg = 8 B
-# current buf: size = 8162 B / used = 208 B / count = 26 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 226 B / avg = 8 B
+# current buf: size = 8162 B / used = 226 B / count = 27 / avg = 8 B
 
-# strcache performance: lookups = 33 / hit rate = 21%
+# strcache performance: lookups = 34 / hit rate = 20%
 # hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=1/33=3%
-# Finished Make data base on Wed May 18 16:19:32 2022
+# Load=27/8192=0%, Rehash=0, Collisions=1/34=3%
+# Finished Make data base on Fri May 20 02:47:54 2022
 
  

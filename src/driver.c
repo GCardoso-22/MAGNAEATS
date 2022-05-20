@@ -10,6 +10,7 @@ Pedro Correia - 54570
 #include "main.h"
 #include "driver.h"
 #include "synchronization.h"
+#include "metime.h"
 
 int execute_driver(int driver_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
@@ -45,6 +46,7 @@ void driver_receive_operation(struct operation *op, struct communication_buffers
     {
         read_rest_driver_buffer(buffers->rest_driv, data->buffers_size, op);
         consume_end(sems->rest_driv);
+        set_driver_time(op);
     }
 }
 

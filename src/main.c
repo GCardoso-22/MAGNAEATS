@@ -10,6 +10,8 @@ Pedro Correia - 54570
 #include "driver.h"
 #include "restaurant.h"
 #include "synchronization.h"
+#include "configuration.h"
+#include "metime.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,18 +53,13 @@ int main(int argc, char *argv[])
 
 void main_args(int argc, char *argv[], struct main_data *data)
 {
-	if (argc == 6)
+	if (argc == 2)
 	{
-		data->max_ops = atoi(argv[1]);
-		data->buffers_size = atoi(argv[2]);
-		data->n_clients = atoi(argv[3]);
-		data->n_restaurants = atoi(argv[4]);
-		data->n_drivers = atoi(argv[5]);
+		config(argv[1], data);
 	}
 	else
 	{
-		printf("Insira os dados necessários\n");
-		printf("magnaeats max_ops buffers_size n_restaurants n_drivers n_clients\n");
+		printf("Insira um ficheiro com as configuaracoes necessarias\n");
 		exit(0);
 	}
 }
@@ -137,7 +134,7 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 		}
 		else if (strcasecmp(cmd, "stop") == 0)
 		{
-			printf("Parei (menti)\n");
+			// printf("Parei (menti)\n");
 			stop_execution(data, buffers, sems);
 			break;
 		}
@@ -170,16 +167,16 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 		// printf("scan buffo\n");
 		scanf("%d %d %20s", &requestingClient, &requestedRest, requestedDish);
 		// printf("dps can\n");
-
+		set_start_time(&op);
 		op.id = *op_counter;
 		op.requesting_client = requestingClient;
 		op.requested_rest = requestedRest;
 		op.requested_dish = requestedDish;
-
 		// printf("%d\n", op.id);
 		// printf("%d\n", op.requesting_client);
 		// printf("%d\n", op.requested_rest);
 		// printf("%s\n", op.requested_dish);
+
 		produce_begin(sems->main_rest);
 		write_main_rest_buffer(buffers->main_rest, data->buffers_size, &op);
 		produce_end(sems->main_rest);

@@ -10,6 +10,7 @@ Pedro Correia - 54570
 #include "main.h"
 #include "restaurant.h"
 #include "synchronization.h"
+#include "metime.h"
 
 int execute_restaurant(int rest_id, struct communication_buffers *buffers, struct main_data *data, struct semaphores *sems)
 {
@@ -45,6 +46,7 @@ void restaurant_receive_operation(struct operation *op, int rest_id, struct comm
     {
         read_main_rest_buffer(buffers->main_rest, rest_id, data->buffers_size, op);
         consume_end(sems->main_rest);
+        set_rest_time(op);
     }
 }
 
