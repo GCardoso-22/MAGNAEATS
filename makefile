@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -g -Wall -I $(INC_DIR)
 LIBS = -lm -lrt -lpthread
 
-OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o log.o
+OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o log.o mesignal.o
 
 main.o = main.h memory.h process.h client.h driver.h restaurant.h configuration.h metime.h log.h mesignal.h
 process.o = memory.h main.h process.h client.h restaurant.h driver.h synchronization.h
@@ -24,6 +24,7 @@ restaurant.o = memory.h main.h restaurant.h synchronization.h
 configuration.o = configuration.h
 metime.o = metime.h
 log.o = log.h
+mesignal.o = mesignal.h main.h synchronization.h
 
 
 magnaeats: $(OBJECTS)
