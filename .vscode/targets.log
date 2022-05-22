@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 22 17:10:53 2022
+# Make data base, printed on Sun May 22 23:02:50 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ SNAP_DATA = /var/snap/code/97
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:32985
+JOURNAL_STREAM = 8:32286
 # makefile (from 'makefile', line 14)
 CFLAGS = -g -Wall -I $(INC_DIR)
 # environment
@@ -85,7 +85,7 @@ LC_CTYPE = pt_PT.UTF-8
 # makefile (from 'makefile', line 20)
 process.o = memory.h main.h process.h client.h restaurant.h driver.h synchronization.h
 # environment
-MANAGERPID = 1037
+MANAGERPID = 1056
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -101,7 +101,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/goncalo-VirtualBox:@/tmp/.ICE-unix/1329,unix/goncalo-VirtualBox:/tmp/.ICE-unix/1329
+SESSION_MANAGER = local/goncalo-VirtualBox:@/tmp/.ICE-unix/1348,unix/goncalo-VirtualBox:/tmp/.ICE-unix/1348
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -123,7 +123,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 846fefa96ef84d8b9b9d7a1e55d7d1fb
+INVOCATION_ID = 3484cef9a20a4ce1bbbfcb1c2765c634
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -135,7 +135,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3786
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2204
 # automatic
 %F = $(notdir $%)
 # environment
@@ -149,7 +149,7 @@ PWD = /home/goncalo/Documents/GitHub/MAGNAEATS
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1262
+SSH_AGENT_PID = 1279
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'makefile', line 10)
@@ -209,7 +209,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-12bae3f0-3efa-467e-ba49-bf2290c24d1d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-dbb7f1cf-6ba9-42d4-b755-39b29f12f4a0.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -263,7 +263,7 @@ LC_NUMERIC = pt_PT.UTF-8
 # automatic
 <F = $(notdir $<)
 # makefile (from 'makefile', line 19)
-main.o = main.h memory.h process.h client.h driver.h restaurant.h configuration.h metime.h log.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h configuration.h metime.h log.h mesignal.h
 # environment
 LC_MEASUREMENT = pt_PT.UTF-8
 # environment
@@ -274,13 +274,13 @@ LC_ALL = C
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # makefile (from 'makefile', line 15)
 LIBS = -lm -lrt -lpthread
- 
 # automatic
 ^F = $(notdir $^)
 # makefile (from 'makefile', line 23)
 restaurant.o = memory.h main.h restaurant.h synchronization.h
 # default
 SUFFIXES := 
+ 
 # environment
 SNAP_REEXEC = 
 # environment
@@ -302,7 +302,7 @@ LANG = C
 # makefile (from 'makefile', line 9)
 SRC_dir = src
 # environment
-VSCODE_PID = 3832
+VSCODE_PID = 2251
 # makefile (from 'makefile', line 26)
 log.o = log.h
 # variable set hash-table stats:
@@ -314,15 +314,15 @@ log.o = log.h
 
 # Directories
 
-# . (device 2053, inode 924479): 14 files, no impossibilities.
-# src (device 2053, inode 1837869): No files, no impossibilities so far.
+# . (device 2053, inode 1838830): 13 files, no impossibilities.
+# src (device 2053, inode 1838910): No files, no impossibilities so far.
 
-# 14 files, no impossibilities in 2 directories.
+# 13 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 %.o: src/%.c
-#  recipe to execute (from 'makefile', line 32):
+#  recipe to execute (from 'makefile', line 33):
 	$(CC) $(CFLAGS) -o $(OBJ_dir)/$@ -c $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -333,7 +333,7 @@ clear:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 35):
+#  recipe to execute (from 'makefile', line 36):
 	rm -f $(OBJ_dir)/*.o
 	rm -f $(BIN_dir)/magnaeats
 
@@ -366,13 +366,13 @@ magnaeats: main.o memory.o process.o client.o driver.o restaurant.o synchronizat
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 29):
+#  recipe to execute (from 'makefile', line 30):
 	$(CC) $(addprefix $(OBJ_dir)/,$(OBJECTS)) -o $(BIN_dir)/magnaeats $(LIBS)
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 17:10:02.381031096
+#  Last modified 2022-05-22 22:59:11.338530915
 #  File has been updated.
 #  Successfully updated.
 
@@ -432,12 +432,12 @@ log.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 33 / storage = 291 B / avg = 8 B
-# current buf: size = 8162 B / used = 291 B / count = 33 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 32 / storage = 280 B / avg = 8 B
+# current buf: size = 8162 B / used = 280 B / count = 32 / avg = 8 B
 
-# strcache performance: lookups = 40 / hit rate = 17%
+# strcache performance: lookups = 39 / hit rate = 17%
 # hash-table stats:
-# Load=33/8192=0%, Rehash=0, Collisions=1/40=2%
-# Finished Make data base on Sun May 22 17:10:53 2022
+# Load=32/8192=0%, Rehash=0, Collisions=1/39=3%
+# Finished Make data base on Sun May 22 23:02:50 2022
 
  
