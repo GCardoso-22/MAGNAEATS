@@ -65,6 +65,21 @@ int main(int argc, char *argv[])
 
 void main_args(int argc, char *argv[], struct main_data *data)
 {
+
+
+	if (argc != 1)
+		{
+			config(argv[1], data);
+		}
+		else
+		{
+			printf("Insira um ficheiro com as configuaracoes necessarias\n");
+			exit(0);
+			
+		}
+
+	/*
+
 	if (argc == 7)
 	{
 		data->max_ops = atoi(argv[1]);
@@ -81,8 +96,9 @@ void main_args(int argc, char *argv[], struct main_data *data)
 		printf("Insira os dados necessários");
 		printf("magnaeats max_ops buffers_size n_restaurants n_drivers n_clients\n");
 		exit(0);
+		
 
-		/*
+		
 		if (argc != 1)
 		{
 			config(argv[1], data);
@@ -91,8 +107,9 @@ void main_args(int argc, char *argv[], struct main_data *data)
 		{
 			printf("Insira um ficheiro com as configuaracoes necessarias\n");
 			exit(0);
-			*/
+			
 	}
+	*/
 }
 
 void create_dynamic_memory_buffers(struct main_data *data)
