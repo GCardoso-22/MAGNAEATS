@@ -43,7 +43,9 @@ void config(char *nomeFicheiro, struct main_data *data)
                     data->n_drivers = atoi(linha);
                     break;
                 case 5:
+                    printf ("linha = %s", linha);
                     data->log_filename = linha;
+                    printf("teste + %s", data->log_filename);
                     break;
                 
                 case 6:
