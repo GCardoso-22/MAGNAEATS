@@ -72,6 +72,7 @@ void consume_end(struct prodcons *pc)
 
 void semaphore_mutex_lock(sem_t *sem)
 {
+    
     sem_wait(sem);
 }
 
