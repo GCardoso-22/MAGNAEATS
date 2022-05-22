@@ -11,6 +11,7 @@ Pedro Correia - 54570
 #include <fcntl.h>
 #include <unistd.h>
 #include "memory.h"
+#include <time.h>
 
 void *create_shared_memory(char *name, int size)
 {

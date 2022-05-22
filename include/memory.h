@@ -1,3 +1,4 @@
+#include <time.h>
 #ifndef MEMORY_H_GUARD
 #define MEMORY_H_GUARD
 
