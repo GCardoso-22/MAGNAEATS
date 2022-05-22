@@ -5,6 +5,7 @@ Pedro Correia - 54570
  */
 #include "metime.h"
 #include <time.h>
+#include <stdlib.h>
 
 void set_start_time(struct operation *op)
 {

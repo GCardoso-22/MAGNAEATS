@@ -11,6 +11,8 @@
 #define STR_SHM_RESULTS "SHM_RESULTS"
 #define STR_SHM_TERMINATE "SHM_TERMINATE"
 
+#include <time.h>
+
 struct pointers
 {
 	int in;

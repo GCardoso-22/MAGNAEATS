@@ -10,8 +10,9 @@ Pedro Correia - 54570
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "memory.h"
 #include <time.h>
+#include "memory.h"
+#include "metime.h"
 
 void *create_shared_memory(char *name, int size)
 {

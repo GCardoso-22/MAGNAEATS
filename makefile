@@ -16,13 +16,13 @@ LIBS = -lm -lrt -lpthread
 
 OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o
 
-main.o = main.h memory.h process.h client.h driver.h restaurant.h synchronization.h metime.h configuration.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h configuration.h metime.h
 process.o = memory.h main.h process.h client.h restaurant.h driver.h synchronization.h
-client.o = memory.h main.h client.h synchronization.h metime.h
-driver.o =  memory.h main.h driver.h synchronization.h metime.h
-restaurant.o = memory.h main.h restaurant.h synchronization.h metime.h
-metime.o = metime.h
+client.o = memory.h main.h client.h synchronization.h
+driver.o =  memory.h main.h driver.h synchronization.h
+restaurant.o = memory.h main.h restaurant.h synchronization.h
 configuration.o = configuration.h
+metime.o = metime.h
 
 magnaeats: $(OBJECTS)
 	$(CC) $(addprefix $(OBJ_dir)/,$(OBJECTS)) -o $(BIN_dir)/magnaeats $(LIBS)
