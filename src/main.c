@@ -13,9 +13,20 @@ Pedro Correia - 54570
 #include "configuration.h"
 #include "metime.h"
 #include "log.h"
+#include "mesignal.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
+
+struct main_data *data;
+struct communication_buffers *buffers;
+struct semaphores *sems;
+
+void ctrlC()
+{
+	stop_execution(data, buffers, sems);
+}
 
 int main(int argc, char *argv[])
 {
@@ -141,6 +152,7 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 	// falta acabar
 	while (1)
 	{
+		signal(SIGINT, ctrlC);
 		printf("Introduza uma opção:\n");
 		scanf("%s", cmd);
 		if (strcasecmp(cmd, "request") == 0)
@@ -204,7 +216,7 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 
 		printf("O pedido #%d foi criado!\n", *op_counter);
 		(*op_counter)++;
-		make_log(data, "op", 0);
+		make_log(data, "request", 0);
 	}
 	else
 	{
@@ -238,19 +250,20 @@ void read_status(struct main_data *data, struct semaphores *sems)
 
 void stop_execution(struct main_data *data, struct communication_buffers *buffers, struct semaphores *sems)
 {
-	make_log(data, "stop", 0);
+	// printf("yo\n");
 	*(data->terminate) = 1;
 	// printf("yo\n");
 	wakeup_processes(data, sems);
-
+	// printf("yo\n");
 	wait_processes(data);
 	// printf("yo1\n");
 	write_statistics(data);
 	// printf("yo2");
 	destroy_semaphores(sems);
-
+	// printf("yo3\n");
 	destroy_memory_buffers(data, buffers);
-	//
+	// printf("yo4\n");
+	make_log(data, "stop", 0);
 }
 
 void wait_processes(struct main_data *data)
