@@ -12,6 +12,7 @@ Pedro Correia - 54570
 #include "synchronization.h"
 #include "configuration.h"
 #include "metime.h"
+#include "log.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,14 +54,33 @@ int main(int argc, char *argv[])
 
 void main_args(int argc, char *argv[], struct main_data *data)
 {
-	if (argc == 2)
+	if (argc == 7)
 	{
-		config(argv[1], data);
+		data->max_ops = atoi(argv[1]);
+		data->buffers_size = atoi(argv[2]);
+		data->n_clients = atoi(argv[3]);
+		data->n_restaurants = atoi(argv[4]);
+		data->n_drivers = atoi(argv[5]);
+		data->log_filename = argv[5];
+		// data->statistics_filename = ipt[6];
+		// data->alarm_time = atoi(ipt[7]);
 	}
 	else
 	{
-		printf("Insira um ficheiro com as configuaracoes necessarias\n");
+		printf("Insira os dados necessários");
+		printf("magnaeats max_ops buffers_size n_restaurants n_drivers n_clients\n");
 		exit(0);
+
+		/*
+		if (argc != 1)
+		{
+			config(argv[1], data);
+		}
+		else
+		{
+			printf("Insira um ficheiro com as configuaracoes necessarias\n");
+			exit(0);
+			*/
 	}
 }
 
@@ -145,6 +165,7 @@ void user_interaction(struct communication_buffers *buffers, struct main_data *d
 			printf("	status <id> - consultar o estado do pedido especificado pelo id.\n");
 			printf("	stop - terminar a execução do MagnaEats.\n");
 			printf("	help - informações de ajuda sobre as várias opções.\n");
+			make_log(data, cmd, 0);
 		}
 		else
 		{
@@ -183,6 +204,7 @@ void create_request(int *op_counter, struct communication_buffers *buffers, stru
 
 		printf("O pedido #%d foi criado!\n", *op_counter);
 		(*op_counter)++;
+		make_log(data, "op", 0);
 	}
 	else
 	{
@@ -204,6 +226,7 @@ void read_status(struct main_data *data, struct semaphores *sems)
 			printf("Pedido #%d com estado %c requisitado pelo cliente %d ao restaurante %d com o prato %s,ainda não foi recebido no restaurante!\n",
 				   id, data->results[id].status, data->results[id].requesting_client, data->results[id].requested_rest, data->results[id].requested_dish);
 			check = 1;
+			make_log(data, "status", i);
 		}
 	}
 	if (check != 1)
@@ -215,6 +238,7 @@ void read_status(struct main_data *data, struct semaphores *sems)
 
 void stop_execution(struct main_data *data, struct communication_buffers *buffers, struct semaphores *sems)
 {
+	make_log(data, "stop", 0);
 	*(data->terminate) = 1;
 	// printf("yo\n");
 	wakeup_processes(data, sems);

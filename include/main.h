@@ -25,6 +25,10 @@ struct main_data
 	struct operation *results; // array com histórico de ops executadas
 
 	int *terminate; // flag booleana, valor 1 indica que magnaeats deve terminar a sua execução
+
+	char *log_filename;
+	char *statistics_filename;
+	int alarm_time;
 };
 
 /* Função que lê os argumentos da aplicação, nomeadamente o número

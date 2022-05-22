@@ -3,6 +3,9 @@ Diogo Chambel - 53319
 Gonçalo Cardoso - 54415
 Pedro Correia - 54570
 */
+#ifndef CONFIGURATION_H_GUARD
+#define CONFIGURATION_H_GUARD
+
 #include "main.h"
 
 #define MAXLINHA 1024
@@ -14,3 +17,5 @@ Pedro Correia - 54570
  * estrutura main_data.
  */
 void config(char *nomeficheiro, struct main_data *data);
+
+#endif
