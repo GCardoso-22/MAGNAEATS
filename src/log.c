@@ -12,9 +12,9 @@ Pedro Correia - 54570
 void make_log(struct main_data *data, char *intruction, char argument)
 {
     FILE *log;
-    struct timespec *clock = 0;
+    struct timespec clock;
 
-    if (clock_gettime(CLOCK_REALTIME, clock) == -1)
+    if (clock_gettime(CLOCK_REALTIME, &clock) == -1)
     {
         perror("clock gettime");
         exit(EXIT_FAILURE);
@@ -27,19 +27,19 @@ void make_log(struct main_data *data, char *intruction, char argument)
     }
     char realtime[30];
     struct tm *timeinfo;
-    timeinfo = localtime(&clock->tv_sec);
+    timeinfo = localtime(&clock.tv_sec);
 
     if (strcmp(intruction, "status") == 0)
     {
         sprintf(realtime, "%d-%d-%d %d:%d:%d.%ld %s %d", timeinfo->tm_mday,
                 timeinfo->tm_mon + 1, timeinfo->tm_year + 1900,
-                timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, clock->tv_nsec, intruction, argument);
+                timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, clock.tv_nsec, intruction, argument);
     }
     else
     {
         sprintf(realtime, "%d-%d-%d %d:%d:%d.%ld %s", timeinfo->tm_mday,
                 timeinfo->tm_mon + 1, timeinfo->tm_year + 1900,
-                timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, clock->tv_nsec, intruction);
+                timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, clock.tv_nsec, intruction);
     }
 
     fprintf(log, "%s\n", realtime);

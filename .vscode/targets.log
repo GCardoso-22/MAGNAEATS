@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 22 00:51:54 2022
+# Make data base, printed on Sun May 22 17:10:53 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ SNAP_DATA = /var/snap/code/97
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:33219
+JOURNAL_STREAM = 8:32985
 # makefile (from 'makefile', line 14)
 CFLAGS = -g -Wall -I $(INC_DIR)
 # environment
@@ -65,7 +65,7 @@ MAKEFILE_LIST :=  makefile
 # automatic
 @F = $(notdir $@)
 # makefile (from 'makefile', line 22)
-driver.o = memory.h main.h driver.h synchronization.h metime.h
+driver.o = memory.h main.h driver.h synchronization.h
 # environment
 GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
@@ -85,7 +85,7 @@ LC_CTYPE = pt_PT.UTF-8
 # makefile (from 'makefile', line 20)
 process.o = memory.h main.h process.h client.h restaurant.h driver.h synchronization.h
 # environment
-MANAGERPID = 1065
+MANAGERPID = 1037
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -101,13 +101,13 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/goncalo-VirtualBox:@/tmp/.ICE-unix/1355,unix/goncalo-VirtualBox:/tmp/.ICE-unix/1355
+SESSION_MANAGER = local/goncalo-VirtualBox:@/tmp/.ICE-unix/1329,unix/goncalo-VirtualBox:/tmp/.ICE-unix/1329
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/goncalo/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # makefile (from 'makefile', line 21)
-client.o = memory.h main.h client.h synchronization.h metime.h
+client.o = memory.h main.h client.h synchronization.h
 # environment
 SNAP = /snap/code/97
 # makefile (from 'makefile', line 7)
@@ -123,7 +123,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 4bfcd2afcd3d486ba00fd4890872a63f
+INVOCATION_ID = 846fefa96ef84d8b9b9d7a1e55d7d1fb
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -135,7 +135,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2752
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3786
 # automatic
 %F = $(notdir $%)
 # environment
@@ -149,7 +149,7 @@ PWD = /home/goncalo/Documents/GitHub/MAGNAEATS
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1285
+SSH_AGENT_PID = 1262
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'makefile', line 10)
@@ -166,19 +166,19 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 VSCODE_CLI = 1
 # environment
 VSCODE_CODE_CACHE_PATH = /home/goncalo/.config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
-# makefile (from 'makefile', line 24)
+# makefile (from 'makefile', line 25)
 metime.o = metime.h
 # environment
 LOGNAME = goncalo
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # environment
 SNAP_CONTEXT = 8iV-Wvf6oL-BFfr4Uy33IFaIxegNH9UDbgMm7iPFmQ6VygICrKUA
 # automatic
 +F = $(notdir $+)
-# makefile (from 'makefile', line 25)
+# makefile (from 'makefile', line 24)
 configuration.o = configuration.h
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
@@ -209,7 +209,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b55bd3cb-f878-4b20-a618-fe39f06f3af4.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-12bae3f0-3efa-467e-ba49-bf2290c24d1d.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -263,7 +263,7 @@ LC_NUMERIC = pt_PT.UTF-8
 # automatic
 <F = $(notdir $<)
 # makefile (from 'makefile', line 19)
-main.o = main.h memory.h process.h client.h driver.h restaurant.h synchronization.h metime.h configuration.h
+main.o = main.h memory.h process.h client.h driver.h restaurant.h configuration.h metime.h log.h
 # environment
 LC_MEASUREMENT = pt_PT.UTF-8
 # environment
@@ -274,10 +274,11 @@ LC_ALL = C
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # makefile (from 'makefile', line 15)
 LIBS = -lm -lrt -lpthread
+ 
 # automatic
 ^F = $(notdir $^)
 # makefile (from 'makefile', line 23)
-restaurant.o = memory.h main.h restaurant.h synchronization.h metime.h
+restaurant.o = memory.h main.h restaurant.h synchronization.h
 # default
 SUFFIXES := 
 # environment
@@ -293,7 +294,7 @@ GJS_DEBUG_OUTPUT = stderr
 # default
 .RECIPEPREFIX := 
 # makefile (from 'makefile', line 17)
-OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o
+OBJECTS = main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o log.o
 # environment
 LC_ADDRESS = pt_PT.UTF-8
 # environment
@@ -301,9 +302,11 @@ LANG = C
 # makefile (from 'makefile', line 9)
 SRC_dir = src
 # environment
-VSCODE_PID = 2799
+VSCODE_PID = 3832
+# makefile (from 'makefile', line 26)
+log.o = log.h
 # variable set hash-table stats:
-# Load=145/1024=14%, Rehash=0, Collisions=28/174=16%
+# Load=146/1024=14%, Rehash=0, Collisions=28/175=16%
 
 # Pattern-specific Variable Values
 
@@ -311,16 +314,15 @@ VSCODE_PID = 2799
 
 # Directories
 
-# . (device 2053, inode 924479): 11 files, no impossibilities.
+# . (device 2053, inode 924479): 14 files, no impossibilities.
 # src (device 2053, inode 1837869): No files, no impossibilities so far.
 
-# 11 files, no impossibilities in 2 directories.
+# 14 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
- 
 %.o: src/%.c
-#  recipe to execute (from 'makefile', line 31):
+#  recipe to execute (from 'makefile', line 32):
 	$(CC) $(CFLAGS) -o $(OBJ_dir)/$@ -c $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -331,7 +333,7 @@ clear:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 34):
+#  recipe to execute (from 'makefile', line 35):
 	rm -f $(OBJ_dir)/*.o
 	rm -f $(BIN_dir)/magnaeats
 
@@ -360,17 +362,17 @@ process.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-magnaeats: main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o
+magnaeats: main.o memory.o process.o client.o driver.o restaurant.o synchronization.o configuration.o metime.o log.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 28):
+#  recipe to execute (from 'makefile', line 29):
 	$(CC) $(addprefix $(OBJ_dir)/,$(OBJECTS)) -o $(BIN_dir)/magnaeats $(LIBS)
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 00:49:32.924846056
+#  Last modified 2022-05-22 17:10:02.381031096
 #  File has been updated.
 #  Successfully updated.
 
@@ -416,20 +418,26 @@ memory.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+log.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/34=0%
+# Load=16/1024=2%, Rehash=0, Collisions=0/36=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 266 B / avg = 9 B
-# current buf: size = 8162 B / used = 266 B / count = 29 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 33 / storage = 291 B / avg = 8 B
+# current buf: size = 8162 B / used = 291 B / count = 33 / avg = 8 B
 
-# strcache performance: lookups = 36 / hit rate = 19%
+# strcache performance: lookups = 40 / hit rate = 17%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=1/36=3%
-# Finished Make data base on Sun May 22 00:51:54 2022
+# Load=33/8192=0%, Rehash=0, Collisions=1/40=2%
+# Finished Make data base on Sun May 22 17:10:53 2022
 
  
