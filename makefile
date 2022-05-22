@@ -27,6 +27,7 @@ log.o = log.h
 mesignal.o = mesignal.h main.h synchronization.h
 
 
+
 magnaeats: $(OBJECTS)
 	$(CC) $(addprefix $(OBJ_dir)/,$(OBJECTS)) -o $(BIN_dir)/magnaeats $(LIBS)
 
